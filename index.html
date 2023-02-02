@@ -9,11 +9,43 @@
 </head> 
 
 <body>
-	<!-- Élément <div> qui sert à center le contenu dans la page (container) -->
-	<div class="container">
-		<!-- Vous devez ajouter vos balises sous ce commentaire -->
+    <header>
+        
+    </header>
 
-	</div>
+        <h1> Jeu de Memoire </h1>
+    
+        <fieldset>
+
+            <legend>Remplir les cases</legend>
+
+            <div class="container">
+
+                <form id="post" action="indexjeu.html" >
+
+                    <label for="inpPrenom">Votre prénom :</label>
+                    
+                    <input type="text" id="txtPrenom" name="txtPrenom" required>
+                    
+                    <label for="inpNom">Votre nom :</label>
+                    
+                    <input type="text" id="txtNom" name="txtNom" required>
+
+                    <label for="inpcarte">Cartes :</label>
+
+                    <input type="number" name="nbrQuantite" step="2" min="0" max="16" required>
+                    
+                    <input type="submit" value="Go" checked>
+                    
+                </form>
+
+            </div>
+
+        </fieldset>
+
+
+    
+
 </body>
 
 </html>
