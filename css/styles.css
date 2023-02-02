@@ -16,7 +16,7 @@ body{
 
 
 header {
-    background-image: url(images/Memory-logo.webp);
+    background-image: url(../images/Memory-logo.webp);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -26,12 +26,11 @@ header {
 }
 
 h1{
-    margin-left: 40%;
-    font-size: 50px;
+    margin-left: 35%;
+    font-size: 70px;
     
     
-    color: rgb(60, 154, 93);
-    
+    color: rgb(9, 67, 75);
     
 }
 
@@ -45,15 +44,16 @@ body {
     padding: 10px;
     font-size: 20px;
 }
+
 .container label,input {
-    margin: 20px;
+	width: 15%;
+    margin: 10px;
     height: 20px;
 }
 legend {
+
   margin-left: 20px;
   font-size: 20px;
-  
-    
 }
 
 input[type="submit"]{
