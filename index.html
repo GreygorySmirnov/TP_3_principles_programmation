@@ -6,6 +6,7 @@
 	<title>Ma première page web</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/styles.css">
+    <script src="script.js" defer></script>
 </head> 
 
 <body>
@@ -14,14 +15,15 @@
     </header>
 
         <h1> Jeu de Memoire </h1>
-    
+         <div id="timer"></div>
         <fieldset>
 
             <legend>Remplir les cases</legend>
+            
 
             <div class="container">
 
-                <form id="post" action="indexjeu.html" >
+                <form id="formulaire" method="get" >
 
                     <label for="inpPrenom">Votre prénom :</label>
                     
@@ -43,9 +45,37 @@
 
         </fieldset>
 
-
-    
-
+        <div id="game" style="display: none;">
+            
+            <div id="cards"></div>
+          </div>
+          
+          <button id="playAgainBtn">Jouer de nouveau</button>
+          
+          <div id="modal" style="display: none">
+            <div class="modal-content">
+              <span id="closeBtn">&times;</span>
+              <p>Êtes-vous prêt à retourner au formulaire ?</p>
+              <button id="yesBtn">Oui</button>
+              <button id="noBtn">Non</button>
+            </div>
+          </div>
+          <div id="form-container">
+           
+             
+            
+            <div id="error-message"></div>
+          </div>
+          <div id="game-container" style="display: none;">
+            <p id="timer"></p>
+            <div id="card-container"></div>
+            <p id="result-message"></p>
+          </div>
+         
+          
+        
+          
+          
 </body>
 
 </html>
