@@ -87,3 +87,34 @@ function cacherCartes(){
     carte1 = null;
     carte2 = null;
 }
+
+// Get references to the button and display elements
+
+const timerDisplay = document.getElementById("timer");
+
+// Set the initial duration in seconds
+let duree = 300;
+let intervalId;
+
+let compteurJeu = jeu.addEventListener("click", function() {
+  // Start the interval
+
+    if(intervalId==true)
+    {
+        intervalId = setInterval(function() {
+            duree--;
+            let minutes = Math.floor(duree / 60);
+            let seconds = duree % 60;
+
+            // Display the time in minutes and seconds
+            timerDisplay.innerHTML = minutes + " minutes " + seconds + " seconds";
+
+            // If the time has run out, clear the interval and show a message
+            if (duree === 0) {
+                clearInterval(intervalId);
+                timerDisplay.innerHTML = "Time's up!";
+            }
+
+        }, 1000);
+    }
+});

@@ -65,3 +65,10 @@ fieldset{
 .invalide {
 	color :rgb(149, 59, 59);
 }
+
+#timer {
+    font-size: 30px;
+    color: rgb(9, 67, 75);
+    margin:0 auto;
+}
+
