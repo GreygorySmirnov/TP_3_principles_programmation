@@ -40,7 +40,7 @@ body {
 
 
 .container{
-    margin-top: 50px;
+    margin-top: 30px;
     padding: 10px;
     font-size: 20px;
 }
@@ -56,27 +56,39 @@ legend {
   font-size: 20px;
 }
 
-input[type="submit"]{
+button[type="submit"]{
     width: 40px;
     height:30px ;
 }
 
-input[type="submit"]:hover{
+button[type="submit"]:hover{
    
     background-color:rgb(93, 151, 151);
 }
 
 fieldset{
-    height: 200px;
+    height: 180px;
     width: 80%;
     margin-left: 150px;
     font-size: 10px;
-    margin-top: 80px;
+    
+    margin-bottom: 30px;
     
 }
 
 .invalide {
-	color :rgb(149, 59, 59);
+	color :rgb(0, 0, 0);
 	text-align: center;
     font-size: 30px;
+}
+
+#timer{
+    color :rgb(74, 18, 18);
+	text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.game{
+    background-image: url(../images/etoile-definition.webp);
 }

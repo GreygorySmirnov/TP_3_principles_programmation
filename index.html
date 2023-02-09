@@ -6,14 +6,31 @@
 	<title>Ma première page web</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/styles.css">
+    <script src="script.js" defer></script>
 </head> 
 
 <body>
     <header>
         
     </header>
+    
+    <h1> Jeu de Memoire </h1>
+    
+    <div class="invalide">
+        <p id="erreur-prenom"></p>
+        <p id="erreur-nom"></p>
+        <p id="erreur-nombrePaire"></p>
+    </div>
+    <div class="game" id="jeu"></div>
+       
+            <div id="timer">
+              <span id="minutes">05</span>:<span id="seconds">00</span>
+            </div>
 
-        <h1> Jeu de Memoire </h1>
+            
+            
+            
+         
     
         <fieldset>
 
@@ -21,31 +38,36 @@
 
             <div class="container">
 
-                <form id="post" action="indexjeu.html" >
+                <form action="" id="parametres-creation" class="bg-primary">
 
                     <label for="inpPrenom">Votre prénom :</label>
                     
                     <input type="text" id="txtPrenom" name="txtPrenom" required>
+
                     
                     <label for="inpNom">Votre nom :</label>
                     
                     <input type="text" id="txtNom" name="txtNom" required>
-
-                    <label for="inpcarte">Cartes :</label>
-
-                    <input type="number" name="nbrQuantite" step="2" min="0" max="16" required>
                     
-                    <input type="submit" value="Go" checked>
+                    
+                    <label for="nb-cartes">Nombre de cartes :</label>
+                    
+                    <input type="number" id="nb-cartes" min="0" max="10"  required>
+                    
+                    
+                    <button type="submit" id="start-btn">GO</button>
                     
                 </form>
-
-            </div>
-
-        </fieldset>
-
-
-    
-
-</body>
+                
+                
+            </fieldset>
+            
+        </div>
+        
+        
+        
+        
+        
+    </body>
 
 </html>
