@@ -2,10 +2,10 @@
 <html lang="fr">
 
 <head>
-	<meta charset="utf-8">
-	<title>Ma première page web</title>
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/styles.css">
+    <meta charset="utf-8">
+    <title>Ma première page web</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="script.js" defer></script>
 </head> 
 
@@ -13,47 +13,32 @@
     <header>
         
     </header>
-
-        <h1> Jeu de Memoire </h1>
-        <div class="invalide">
-            <p id="erreur-nombrePaire"></p>
-            <p id="erreur-nom"></p>
-            <p id="erreur-prenom"></p>
-        </div>
-        
-        <fieldset>
-
-            <legend>Remplir les cases</legend>
-
-            <div class="container">
-
-                <form method="get" id="formulaire">
-
-                    <label for="inpPrenom">Votre prénom :</label>
-                    
-                    <input type="text" id="txtPrenom" name="txtPrenom" required>
-                    
-                    <label for="inpNom">Votre nom :</label>
-                    
-                    <input type="text" id="txtNom" name="txtNom" required>
-
-                    <label for="nombrePaire">Cartes :</label>
-
-                    <input type="number" name="nombrePaire" id="nombrePaire"  min="0" max="10" required>
-                    
-                    <input type="submit" value="Go" checked>
-                    
-                    
-
-                </form>
-
-            </div>
-
-        </fieldset>
-
-
     
-
+    <h1> Jeu de Memoire </h1>
+    
+    <div class="container">
+        
+        <form method="get" id="formulaire">
+            <fieldset>
+                
+                <legend>Remplir les cases</legend>
+                
+                <label for="inpNom">Votre nom :</label>
+                <input type="text" id="txtNom" name="txtNom">
+                <p id="erreur-nom" class="invalide"></p>
+                
+                <label for="nombrePaire">Cartes :</label>
+                <input type="number" name="nombrePaire" id="nombrePaire">
+                <p id="erreur-nombrePaire" class="invalide"></p>
+                
+                <input type="submit" value="Go" checked>
+                
+            </fieldset>
+            
+        </form>
+        
+    </div>
+    
 </body>
 
 </html>
