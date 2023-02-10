@@ -88,28 +88,28 @@ function cacherCartes(){
     carte2 = null;
 }
 
-// Get references to the button and display elements
+// prendre le display du timer
 
 const timerDisplay = document.getElementById("timer");
 
-// Set the initial duration in seconds
+// mettre le temps en secondes
 let duree = 300;
 let intervalId;
 
 let compteurJeu = jeu.addEventListener("click", function() {
-  // Start the interval
+  // commencer le timer
 
-    if(intervalId==true)
+    if(!intervalId)
     {
         intervalId = setInterval(function() {
             duree--;
             let minutes = Math.floor(duree / 60);
             let seconds = duree % 60;
 
-            // Display the time in minutes and seconds
+            // afficher le temps restant
             timerDisplay.innerHTML = minutes + " minutes " + seconds + " seconds";
 
-            // If the time has run out, clear the interval and show a message
+            // si le temps est écoulé, arrêter le timer
             if (duree === 0) {
                 clearInterval(intervalId);
                 timerDisplay.innerHTML = "Time's up!";
