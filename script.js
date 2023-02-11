@@ -93,7 +93,7 @@ function cacherCartes(){
 const timerDisplay = document.getElementById("timer");
 
 // mettre le temps en secondes
-let duree = 300;
+let duree = 3;
 let intervalId;
 
 let compteurJeu = jeu.addEventListener("click", function() {
@@ -107,12 +107,16 @@ let compteurJeu = jeu.addEventListener("click", function() {
             let seconds = duree % 60;
 
             // afficher le temps restant
-            timerDisplay.innerHTML = minutes + " minutes " + seconds + " seconds";
+            timerDisplay.innerHTML = minutes + ":" + seconds ;
 
             // si le temps est écoulé, arrêter le timer
-            if (duree === 0) {
+            if (duree < 0) {
                 clearInterval(intervalId);
                 timerDisplay.innerHTML = "Time's up!";
+                if (confirm("voulez vous rtourner au formulaire?")) {
+                    location.reload() ;
+                    // retoure au formulkaire
+                }
             }
 
         }, 1000);
