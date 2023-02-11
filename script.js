@@ -5,7 +5,7 @@ let jeu = document.getElementById("jeu");
 let carte1 = null;
 let carte2 = null;
 
-formulaire.addEventListener("submit", function(e) {validerFormulaire(e);});
+formulaire.addEventListener("submit", validerFormulaire);
 jeu.hidden = true;
 
 function validerFormulaire(e){
