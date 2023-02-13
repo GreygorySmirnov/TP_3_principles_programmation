@@ -19,12 +19,14 @@ resultatDuJeu.addEventListener("click", msgJeu);
 function msgJeu(){
     if(nombrePaireRetournee == nombrePaire && duree > 0){
         resultatDuJeu.textContent = "Vous avez gagné!";
+        
         boutonRocommencer;
     }
     else{
         resultatDuJeu.textContent = "Vous avez perdu!";
         boutonRocommencer;
     }
+    clearInterval(intervalId);
 }
 
 function validerFormulaire(e){
@@ -79,8 +81,8 @@ function creerJeu(nombrePaire){
     }
     
 }
-function melangerCartes(cartesAMelanger) {
-    cartesAMelanger = [...cartes];
+function melangerCartes() {
+   let cartesAMelanger = [...cartes];
     for (let index = 0; index < cartesAMelanger.length; index++) {
         const element = cartesAMelanger[index];
         let indexAleatoire = Math.floor(Math.random() * cartesAMelanger.length);
@@ -191,7 +193,7 @@ const timerDisplay = document.getElementById("timer");
 let duree = 3;
 let intervalId;
 
-let compteurJeu = jeu.addEventListener("click", function() {
+jeu.addEventListener("click", function() {
     // commencer le timer
   
       if(!intervalId)
@@ -205,8 +207,8 @@ let compteurJeu = jeu.addEventListener("click", function() {
               timerDisplay.innerHTML = minutes + ":" + seconds ;
   
               // si le temps est écoulé, arrêter le timer
-              if (duree < 0) {
-                  clearInterval(intervalId);
+              if (duree < 0 ) {
+                  //clearInterval(intervalId);
                   timerDisplay.innerHTML = "Time's up!";
                     desactiverToutesCartes();
                     boutonRocommencer.hidden = false;
