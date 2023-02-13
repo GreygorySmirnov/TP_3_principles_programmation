@@ -2,7 +2,8 @@ let nombrePaire = 0;
 let nombrePaireRetournee = 0;
 let formulaire = document.getElementById("formulaire")
 let jeu = document.getElementById("jeu");
-
+let boutonRocommencer = document.getElementById("boutonRecommencer");
+let resultatDuJeu = document.getElementById("resultatJeu");
 let carte1 = null;
 let carte2 = null;
 
@@ -10,6 +11,21 @@ let cartes = [];
 
 formulaire.addEventListener("submit", validerFormulaire);
 jeu.hidden = true;
+boutonRocommencer.hidden = true;
+resultatDuJeu.hidden = true;
+
+resultatDuJeu.addEventListener("click", msgJeu);
+
+function msgJeu(){
+    if(nombrePaireRetournee == nombrePaire && duree > 0){
+        resultatDuJeu.textContent = "Vous avez gagné!";
+        boutonRocommencer;
+    }
+    else{
+        resultatDuJeu.textContent = "Vous avez perdu!";
+        boutonRocommencer;
+    }
+}
 
 function validerFormulaire(e){
     e.preventDefault();
@@ -103,7 +119,10 @@ function retournerCarte(e){
             nombrePaireRetournee++;
             if(nombrePaireRetournee == nombrePaire){
                 desactiverToutesCartes();
-                alert("Vous avez gagné!");
+                boutonRocommencer.hidden = false;
+                resultatDuJeu.hidden = false;
+                msgJeu();
+                
             }
         }
         else{
@@ -111,6 +130,13 @@ function retournerCarte(e){
             setTimeout(cacherCartes, 1000);
         }
     }
+}
+
+boutonRocommencer.addEventListener("click", recommencer);
+
+function recommencer(){
+    location.reload();
+    msgJeu();
 }
 
 function desactiverToutesCartes() {
@@ -140,7 +166,7 @@ function activerToutesCartes() {
 const timerDisplay = document.getElementById("timer");
 
 // mettre le temps en secondes
-let duree = 300;
+let duree = 3;
 let intervalId;
 
 let compteurJeu = jeu.addEventListener("click", function() {
@@ -160,10 +186,10 @@ let compteurJeu = jeu.addEventListener("click", function() {
               if (duree < 0) {
                   clearInterval(intervalId);
                   timerDisplay.innerHTML = "Time's up!";
-                  if (confirm("voulez vous rtourner au formulaire?")) {
-                      location.reload() ;
-                      // retoure au formulaire
-                  }
+                    desactiverToutesCartes();
+                    boutonRocommencer.hidden = false;
+                    resultatDuJeu.hidden = false;
+                    msgJeu();
               }
   
           }, 1000);

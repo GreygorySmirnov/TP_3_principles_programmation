@@ -30,7 +30,7 @@
                 <p id="erreur-nom" class="invalide"></p>
                 
                 <label for="nombrePaire">Cartes :</label>
-                <input type="number" name="nombrePaire" id="nombrePaire">
+                <input type="number" name="nombrePaire" min="0" id="nombrePaire">
                 <p id="erreur-nombrePaire" class="invalide"></p>
                 
                 <input type="submit" value="Go" checked>
@@ -43,6 +43,10 @@
             <div id="timer">
                 <span id="minutes">05</span>:<span id="seconds">00</span>
             </div>
+        </div>
+        <div>
+            <p id="resultatJeu"></p>
+            <button id="boutonRecommencer">Recommencer</button>
         </div>
         
     </div>
