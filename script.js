@@ -53,17 +53,27 @@ function creerJeu(nombrePaire){
         cartes.push(CreerCarte(index));
     }
     //Mélanger les cartes
-    melangerCartes();
+    let carteMelanger = melangerCartes();
 
     //Créer les cartes dans le DOM
-    for(let i = 0; i < cartes.length; i++){
-        const elementCarte = cartes[i];
+
+    for(let i = 0; i < carteMelanger.length; i++){
+        const elementCarte = carteMelanger[i];
         jeu.appendChild(elementCarte.carteHTML);
     }
     
 }
-function melangerCartes() {
-    
+function melangerCartes(cartesAMelanger) {
+    cartesAMelanger = [...cartes];
+    for (let index = 0; index < cartesAMelanger.length; index++) {
+        const element = cartesAMelanger[index];
+        let indexAleatoire = Math.floor(Math.random() * cartesAMelanger.length);
+        let carteAleatoire = cartesAMelanger[indexAleatoire];
+        
+        cartesAMelanger[index] = carteAleatoire;
+        cartesAMelanger[indexAleatoire] = element;
+    }
+    return cartesAMelanger;
 }
 
 
