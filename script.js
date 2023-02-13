@@ -63,11 +63,35 @@ function validerFormulaire(e){
 }
 
 function creerJeu(nombrePaire){
+    //Créer les cartes en mémoire
     for (let index = 0; index < nombrePaire; index++) {
-        CreerCarte(index);
-        CreerCarte(index);
+        cartes.push(CreerCarte(index));
+        cartes.push(CreerCarte(index));
     }
+    //Mélanger les cartes
+    let carteMelanger = melangerCartes();
+
+    //Créer les cartes dans le DOM
+
+    for(let i = 0; i < carteMelanger.length; i++){
+        const elementCarte = carteMelanger[i];
+        jeu.appendChild(elementCarte.carteHTML);
+    }
+    
 }
+function melangerCartes(cartesAMelanger) {
+    cartesAMelanger = [...cartes];
+    for (let index = 0; index < cartesAMelanger.length; index++) {
+        const element = cartesAMelanger[index];
+        let indexAleatoire = Math.floor(Math.random() * cartesAMelanger.length);
+        let carteAleatoire = cartesAMelanger[indexAleatoire];
+        
+        cartesAMelanger[index] = carteAleatoire;
+        cartesAMelanger[indexAleatoire] = element;
+    }
+    return cartesAMelanger;
+}
+
 
 function CreerCarte(numeroCarte){
     const carte = document.createElement("button");
@@ -95,9 +119,7 @@ function CreerCarte(numeroCarte){
         }
     };
     
-    cartes.push(carteObjet);
-    
-    jeu.appendChild(carte);
+    return carteObjet;
 }
 
 function retournerCarte(e){
@@ -152,14 +174,14 @@ function activerToutesCartes() {
         element.carteHTML.disabled = false;
     }
 }
-    
-    function cacherCartes(){
-        carte1.retournerCarte();
-        carte2.retournerCarte();
-        carte1 = null;
-        carte2 = null;
-        activerToutesCartes();
-    }
+
+function cacherCartes(){
+    carte1.retournerCarte();
+    carte2.retournerCarte();
+    carte1 = null;
+    carte2 = null;
+    activerToutesCartes();
+}
 
 // prendre le display du timer
 
