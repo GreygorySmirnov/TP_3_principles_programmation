@@ -51,6 +51,21 @@ function creerJeu(nombrePaire){
         CreerCarte(index);
         CreerCarte(index);
     }
+    melangerCartes();
+}
+function melangerCartes() {
+    let indexActuel = cartes.length,
+        aleatoireIndex,
+        temporaire;
+    
+    while (0 !== indexActuel) {
+        aleatoireIndex = Math.floor(Math.random() * indexActuel);
+        indexActuel -= 1;
+
+        temporaire = cartes[indexActuel];
+        cartes[indexActuel] = cartes[aleatoireIndex];
+        cartes[aleatoireIndex] = temporaire;
+    }
 }
 
 function CreerCarte(numeroCarte){
@@ -104,6 +119,7 @@ function retournerCarte(e){
             if(nombrePaireRetournee == nombrePaire){
                 desactiverToutesCartes();
                 alert("Vous avez gagné!");
+                location.reload();
             }
         }
         else{
@@ -161,7 +177,7 @@ let compteurJeu = jeu.addEventListener("click", function() {
                   clearInterval(intervalId);
                   timerDisplay.innerHTML = "Time's up!";
                   if (confirm("voulez vous rtourner au formulaire?")) {
-                      location.reload() ;
+                      location.reload();
                       // retoure au formulaire
                   }
               }
