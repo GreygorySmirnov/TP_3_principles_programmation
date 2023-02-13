@@ -47,11 +47,20 @@ function validerFormulaire(e){
 }
 
 function creerJeu(nombrePaire){
+    //Créer les cartes en mémoire
     for (let index = 0; index < nombrePaire; index++) {
-        CreerCarte(index);
-        CreerCarte(index);
+        cartes.push(CreerCarte(index));
+        cartes.push(CreerCarte(index));
     }
+    //Mélanger les cartes
     melangerCartes();
+
+    //Créer les cartes dans le DOM
+    for(let i = 0; i < cartes.length; i++){
+        const elementCarte = cartes[i];
+        jeu.appendChild(elementCarte);
+    }
+    
 }
 function melangerCartes() {
     let indexActuel = cartes.length,
@@ -66,7 +75,9 @@ function melangerCartes() {
         cartes[indexActuel] = cartes[aleatoireIndex];
         cartes[aleatoireIndex] = temporaire;
     }
+    
 }
+
 
 function CreerCarte(numeroCarte){
     const carte = document.createElement("button");
@@ -94,9 +105,7 @@ function CreerCarte(numeroCarte){
         }
     };
     
-    cartes.push(carteObjet);
-    
-    jeu.appendChild(carte);
+    return carteObjet;
 }
 
 function retournerCarte(e){
@@ -142,21 +151,21 @@ function activerToutesCartes() {
         element.carteHTML.disabled = false;
     }
 }
-    
-    function cacherCartes(){
-        carte1.retournerCarte();
-        carte2.retournerCarte();
-        carte1 = null;
-        carte2 = null;
-        activerToutesCartes();
-    }
+
+function cacherCartes(){
+    carte1.retournerCarte();
+    carte2.retournerCarte();
+    carte1 = null;
+    carte2 = null;
+    activerToutesCartes();
+}
 
 // prendre le display du timer
 
 const timerDisplay = document.getElementById("timer");
 
 // mettre le temps en secondes
-let duree = 300;
+let duree = 3;
 let intervalId;
 
 let compteurJeu = jeu.addEventListener("click", function() {
