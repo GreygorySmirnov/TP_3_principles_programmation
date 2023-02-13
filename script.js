@@ -47,9 +47,18 @@ function validerFormulaire(e){
 }
 
 function creerJeu(nombrePaire){
+    //Créer les cartes en mémoire
     for (let index = 0; index < nombrePaire; index++) {
-        CreerCarte(index);
-        CreerCarte(index);
+        cartes.push(CreerCarte(index));
+        cartes.push(CreerCarte(index));
+    }
+    //Mélanger les cartes
+    
+
+    //Créer les cartes dans le DOM
+    for(let i = 0; i < cartes.length; i++){
+        const elementCarte = cartes[i];
+        jeu.appendChild(elementCarte);
     }
 }
 
@@ -79,9 +88,7 @@ function CreerCarte(numeroCarte){
         }
     };
     
-    cartes.push(carteObjet);
-    
-    jeu.appendChild(carte);
+    return carteObjet;
 }
 
 function retournerCarte(e){
@@ -104,6 +111,7 @@ function retournerCarte(e){
             if(nombrePaireRetournee == nombrePaire){
                 desactiverToutesCartes();
                 alert("Vous avez gagné!");
+                location.reload();
             }
         }
         else{
@@ -126,46 +134,46 @@ function activerToutesCartes() {
         element.carteHTML.disabled = false;
     }
 }
-    
-    function cacherCartes(){
-        carte1.retournerCarte();
-        carte2.retournerCarte();
-        carte1 = null;
-        carte2 = null;
-        activerToutesCartes();
-    }
+
+function cacherCartes(){
+    carte1.retournerCarte();
+    carte2.retournerCarte();
+    carte1 = null;
+    carte2 = null;
+    activerToutesCartes();
+}
 
 // prendre le display du timer
 
 const timerDisplay = document.getElementById("timer");
 
 // mettre le temps en secondes
-let duree = 300;
+let duree = 3;
 let intervalId;
 
 let compteurJeu = jeu.addEventListener("click", function() {
     // commencer le timer
-  
-      if(!intervalId)
-      {
-          intervalId = setInterval(function() {
-              duree--;
-              let minutes = Math.floor(duree / 60);
-              let seconds = duree % 60;
-  
-              // afficher le temps restant
-              timerDisplay.innerHTML = minutes + ":" + seconds ;
-  
-              // si le temps est écoulé, arrêter le timer
-              if (duree < 0) {
-                  clearInterval(intervalId);
-                  timerDisplay.innerHTML = "Time's up!";
-                  if (confirm("voulez vous rtourner au formulaire?")) {
-                      location.reload() ;
-                      // retoure au formulaire
-                  }
-              }
-  
-          }, 1000);
-      }
-  });
+    
+    if(!intervalId)
+    {
+        intervalId = setInterval(function() {
+            duree--;
+            let minutes = Math.floor(duree / 60);
+            let seconds = duree % 60;
+            
+            // afficher le temps restant
+            timerDisplay.innerHTML = minutes + ":" + seconds ;
+            
+            // si le temps est écoulé, arrêter le timer
+            if (duree < 0) {
+                clearInterval(intervalId);
+                timerDisplay.innerHTML = "Time's up!";
+                if (confirm("voulez vous retourner au formulaire?")) {
+                    location.reload();
+                    // retoure au formulaire
+                }
+            }
+            
+        }, 1000);
+    }
+});
