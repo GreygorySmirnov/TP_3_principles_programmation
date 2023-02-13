@@ -58,23 +58,11 @@ function creerJeu(nombrePaire){
     //Créer les cartes dans le DOM
     for(let i = 0; i < cartes.length; i++){
         const elementCarte = cartes[i];
-        jeu.appendChild(elementCarte);
+        jeu.appendChild(elementCarte.carteHTML);
     }
     
 }
 function melangerCartes() {
-    let indexActuel = cartes.length,
-        aleatoireIndex,
-        temporaire;
-    
-    while (0 !== indexActuel) {
-        aleatoireIndex = Math.floor(Math.random() * indexActuel);
-        indexActuel -= 1;
-
-        temporaire = cartes[indexActuel];
-        cartes[indexActuel] = cartes[aleatoireIndex];
-        cartes[aleatoireIndex] = temporaire;
-    }
     
 }
 
