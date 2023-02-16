@@ -2,7 +2,7 @@ let nombrePaire = 0
 let nombrePaireRetournee = 0
 const formulaire = document.getElementById('formulaire')
 const jeu = document.getElementById('jeu')
-const boutonRocommencer = document.getElementById('boutonRecommencer')
+const boutonRecommencer = document.getElementById('boutonRecommencer')
 const resultatDuJeu = document.getElementById('resultatJeu')
 let carte1 = null
 let carte2 = null
@@ -11,7 +11,7 @@ const cartes = []
 
 formulaire.addEventListener('submit', validerFormulaire)
 jeu.hidden = true
-boutonRocommencer.hidden = true
+boutonRecommencer.hidden = true
 resultatDuJeu.hidden = true
 
 resultatDuJeu.addEventListener('click', msgJeu)
@@ -22,7 +22,7 @@ function msgJeu () {
   } else {
     resultatDuJeu.textContent = 'Vous avez perdu!'
   }
-  boutonRocommencer.hidden = false
+  boutonRecommencer.hidden = false
   resultatDuJeu.hidden = false
   clearInterval(intervalId)
 }
@@ -90,10 +90,12 @@ function melangerCartes () {
 }
 
 function CreerCarte (numeroCarte) {
-  const carte = document.createElement('button')
-  carte.style.width = '100px'
-  carte.style.height = '100px'
+  const carte = document.createElement('div')
+  carte.style.width = '236px'
+  carte.style.height = '364px'
 
+  carte.classList.add('carte')
+  carte.classList.add('carte-cachee')
   carte.setAttribute('id-carte', cartes.length)
   carte.setAttribute('numero-carte', numeroCarte)
   carte.addEventListener('click', function (e) { retournerCarte(e) })
@@ -107,9 +109,11 @@ function CreerCarte (numeroCarte) {
       if (this.retourne === false) {
         this.carteHTML.textContent = this.numeroCarte
         this.retourne = true
+        this.carteHTML.classList.replace('carte-cachee', 'carte-retournee')
       } else {
         this.carteHTML.textContent = ''
         this.retourne = false
+        this.carteHTML.classList.replace('carte-retournee', 'carte-cachee')
       }
     }
   }
@@ -129,6 +133,9 @@ function retournerCarte (e) {
     carte2.retournerCarte()
 
     if (carte1.numeroCarte === carte2.numeroCarte) {
+      carte1.carteHTML.classList.add('carte-valide')
+      carte2.carteHTML.classList.add('carte-valide')
+
       carte1 = null
       carte2 = null
 
@@ -138,13 +145,16 @@ function retournerCarte (e) {
         msgJeu()
       }
     } else {
+      carte1.carteHTML.classList.add('carte-invalide')
+      carte2.carteHTML.classList.add('carte-invalide')
+
       desactiverToutesCartes()
       setTimeout(cacherCartes, 1000)
     }
   }
 }
 
-boutonRocommencer.addEventListener('click', recommencer)
+boutonRecommencer.addEventListener('click', recommencer)
 
 function recommencer () {
   location.reload()
@@ -153,21 +163,24 @@ function recommencer () {
 
 function desactiverToutesCartes () {
   for (let index = 0; index < cartes.length; index++) {
-    const element = cartes[index]
-    element.carteHTML.disabled = true
+    const carte = cartes[index]
+    carte.carteHTML.disabled = true
   }
 }
 
 function activerToutesCartes () {
   for (let index = 0; index < cartes.length; index++) {
-    const element = cartes[index]
-    element.carteHTML.disabled = false
+    const carte = cartes[index]
+    carte.carteHTML.disabled = false
   }
 }
 
 function cacherCartes () {
   carte1.retournerCarte()
   carte2.retournerCarte()
+  carte1.carteHTML.classList.remove('carte-invalide')
+  carte2.carteHTML.classList.remove('carte-invalide')
+
   carte1 = null
   carte2 = null
   activerToutesCartes()
