@@ -72,9 +72,9 @@ function creerJeu(nombrePaire){
     }
     //Mélanger les cartes
     let carteMelanger = melangerCartes();
-
+    
     //Créer les cartes dans le DOM
-
+    
     for(let i = 0; i < carteMelanger.length; i++){
         const elementCarte = carteMelanger[i];
         jeu.appendChild(elementCarte.carteHTML);
@@ -82,7 +82,7 @@ function creerJeu(nombrePaire){
     
 }
 function melangerCartes() {
-   let cartesAMelanger = [...cartes];
+    let cartesAMelanger = [...cartes];
     for (let index = 0; index < cartesAMelanger.length; index++) {
         const element = cartesAMelanger[index];
         let indexAleatoire = Math.floor(Math.random() * cartesAMelanger.length);
@@ -190,32 +190,39 @@ function cacherCartes(){
 const timerDisplay = document.getElementById("timer");
 
 // mettre le temps en secondes
-let duree = 3;
+let duree = 300;
 let intervalId;
 
 jeu.addEventListener("click", function() {
     // commencer le timer
-  
-      if(!intervalId)
-      {
-          intervalId = setInterval(function() {
-              duree--;
-              let minutes = Math.floor(duree / 60);
-              let seconds = duree % 60;
-  
-              // afficher le temps restant
-              timerDisplay.innerHTML = minutes + ":" + seconds ;
-  
-              // si le temps est écoulé, arrêter le timer
-              if (duree < 0 ) {
-                  //clearInterval(intervalId);
-                  timerDisplay.innerHTML = "Time's up!";
-                    desactiverToutesCartes();
-                    boutonRocommencer.hidden = false;
-                    resultatDuJeu.hidden = false;
-                    msgJeu();
-              }
-  
-          }, 1000);
-      }
-  });
+    
+    if(!intervalId)
+    {
+        intervalId = setInterval(function() {
+            duree--;
+            let minutes = Math.floor(duree / 60);
+            let seconds = duree % 60;
+            
+            // afficher le temps restant
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            if(minutes < 10){
+                minutes = "0" + minutes;
+            }
+            timerDisplay.innerHTML = minutes + ":" + seconds;
+            
+            
+            // si le temps est écoulé, arrêter le timer
+            if (duree < 0 ) {
+                //clearInterval(intervalId);
+                timerDisplay.innerHTML = "Time's up!";
+                desactiverToutesCartes();
+                boutonRocommencer.hidden = false;
+                resultatDuJeu.hidden = false;
+                msgJeu();
+            }
+            
+        }, 1000);
+    }
+});
