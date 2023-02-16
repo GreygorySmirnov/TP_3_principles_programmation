@@ -30,7 +30,7 @@ function msgJeu () {
 function validerFormulaire (e) {
   e.preventDefault()
   const nom = document.getElementById('txtNom').value
-  nombrePaire = document.getElementById('nombrePaire').value
+  nombrePaire = parseInt(document.getElementById('nombrePaire').value)
 
   const regNom = /^[A-Za-z]{1,}$/
 
@@ -178,7 +178,7 @@ function cacherCartes () {
 const timerDisplay = document.getElementById('timer')
 
 // mettre le temps en secondes
-let duree = 3
+let duree = 300
 let intervalId
 
 jeu.addEventListener('click', function () {
