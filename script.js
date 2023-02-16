@@ -22,6 +22,8 @@ function msgJeu () {
   } else {
     resultatDuJeu.textContent = 'Vous avez perdu!'
   }
+  boutonRocommencer.hidden = false
+  resultatDuJeu.hidden = false
   clearInterval(intervalId)
 }
 
@@ -133,8 +135,6 @@ function retournerCarte (e) {
       nombrePaireRetournee++
       if (nombrePaireRetournee === nombrePaire) {
         desactiverToutesCartes()
-        boutonRocommencer.hidden = false
-        resultatDuJeu.hidden = false
         msgJeu()
       }
     } else {
@@ -204,8 +204,6 @@ jeu.addEventListener('click', function () {
         // clearInterval(intervalId);
         timerDisplay.innerHTML = "Time's up!"
         desactiverToutesCartes()
-        boutonRocommencer.hidden = false
-        resultatDuJeu.hidden = false
         msgJeu()
       }
     }, 1000)
