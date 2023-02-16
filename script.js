@@ -1,64 +1,85 @@
-let nombrePaire = 0
-let nombrePaireRetournee = 0
-const formulaire = document.getElementById('formulaire')
-const jeu = document.getElementById('jeu')
-
-let carte1 = null
-let carte2 = null
+let nombrePaire = 0;
+let nombrePaireRetournee = 0;
+let formulaire = document.getElementById("formulaire")
+let jeu = document.getElementById("jeu");
+let boutonRocommencer = document.getElementById("boutonRecommencer");
+let resultatDuJeu = document.getElementById("resultatJeu");
+let carte1 = null;
+let carte2 = null;
 
 const cartes = []
 
-formulaire.addEventListener('submit', validerFormulaire)
-jeu.hidden = true
+formulaire.addEventListener("submit", validerFormulaire);
+jeu.hidden = true;
+boutonRocommencer.hidden = true;
+resultatDuJeu.hidden = true;
 
-function validerFormulaire (e) {
-  e.preventDefault()
-  // e.target === formulaire
-  const nom = document.getElementById('txtNom').value
-  nombrePaire = document.getElementById('nombrePaire').value
+resultatDuJeu.addEventListener("click", msgJeu);
 
-  const regNom = /^[A-Za-z]{1,}$/
-
-  let erreurDetectee = false
-  if (nombrePaire > 10 || nombrePaire < 2) {
-    document.getElementById('erreur-nombrePaire').textContent = 'Vous devez choisir un nombre de paire valide.'
-    erreurDetectee = true
-    e.preventDefault()
-  } else {
-    document.getElementById('erreur-nombrePaire').textContent = ''
-  }
-
-  if (regNom.test(nom) === false) {
-    document.getElementById('erreur-nom').textContent = 'Vous devez saisir un nom valide.'
-    erreurDetectee = true
-    e.preventDefault()
-  } else {
-    document.getElementById('erreur-nom').textContent = ''
-  }
-
-  if (erreurDetectee === false) {
-    formulaire.hidden = true
-    jeu.hidden = false
-
-    creerJeu(nombrePaire)
-  }
+function msgJeu(){
+    if(nombrePaireRetournee == nombrePaire && duree > 0){
+        resultatDuJeu.textContent = "Vous avez gagné!";
+        
+        boutonRocommencer;
+    }
+    else{
+        resultatDuJeu.textContent = "Vous avez perdu!";
+        boutonRocommencer;
+    }
+    clearInterval(intervalId);
 }
 
-function creerJeu (nombrePaire) {
-  // Créer les cartes en mémoire
-  for (let index = 0; index < nombrePaire; index++) {
-    cartes.push(CreerCarte(index))
-    cartes.push(CreerCarte(index))
-  }
-  // Mélanger les cartes
-  const carteMelanger = melangerCartes()
+function validerFormulaire(e){
+    e.preventDefault();
+    e.target == formulaire;
+    let nom = document.getElementById("txtNom").value;
+    nombrePaire = document.getElementById("nombrePaire").value;
+    
+    let regNom = /^[A-Za-z]{1,}$/;
+    
+    let erreurDetectee = false;
+    if(nombrePaire > 10 || nombrePaire < 2 ){
+        document.getElementById("erreur-nombrePaire").textContent = "Vous devez choisir un nombre de paire valide.";
+        erreurDetectee = true; 
+        e.preventDefault();
+    }
+    else{
+        document.getElementById("erreur-nombrePaire").textContent = "";
+    }
+    
+    if(regNom.test(nom) == false){
+        document.getElementById("erreur-nom").textContent = "Vous devez saisir un nom valide.";
+        erreurDetectee = true;
+        e.preventDefault();
+    }
+    else{
+        document.getElementById("erreur-nom").textContent = "";
+    }
+    
+    if(erreurDetectee == false){
+        formulaire.hidden = true;
+        jeu.hidden = false;
+        
+        creerJeu(nombrePaire);
+    }
+}
 
-  // Créer les cartes dans le DOM
-
-  for (let i = 0; i < carteMelanger.length; i++) {
-    const elementCarte = carteMelanger[i]
-    jeu.appendChild(elementCarte.carteHTML)
-  }
+function creerJeu(nombrePaire){
+    //Créer les cartes en mémoire
+    for (let index = 0; index < nombrePaire; index++) {
+        cartes.push(CreerCarte(index));
+        cartes.push(CreerCarte(index));
+    }
+    //Mélanger les cartes
+    let carteMelanger = melangerCartes();
+    
+    //Créer les cartes dans le DOM
+    
+    for(let i = 0; i < carteMelanger.length; i++){
+        const elementCarte = carteMelanger[i];
+        jeu.appendChild(elementCarte.carteHTML);
+    }
+    
 }
 function melangerCartes () {
   const cartesAMelanger = [...cartes]
@@ -102,32 +123,43 @@ function CreerCarte (numeroCarte) {
   return carteObjet
 }
 
-function retournerCarte (e) {
-  const idCarteCliquee = e.target.getAttribute('id-carte')
-  const carteCliquee = cartes[idCarteCliquee]
-
-  if (carte1 == null) {
-    carte1 = carteCliquee
-    carte1.retournerCarte()
-  } else {
-    carte2 = carteCliquee
-    carte2.retournerCarte()
-
-    if (carte1.numeroCarte === carte2.numeroCarte) {
-      carte1 = null
-      carte2 = null
-
-      nombrePaireRetournee++
-      if (nombrePaireRetournee === nombrePaire) {
-        desactiverToutesCartes()
-        alert('Vous avez gagné!')
-        location.reload()
-      }
-    } else {
-      desactiverToutesCartes()
-      setTimeout(cacherCartes, 1000)
+function retournerCarte(e){
+    let idCarteCliquee = e.target.getAttribute("id-carte");
+    let carteCliquee = cartes[idCarteCliquee];
+    
+    if(carte1 == null){
+        carte1 = carteCliquee;
+        carte1.retournerCarte();
     }
-  }
+    else{
+        carte2 = carteCliquee;
+        carte2.retournerCarte();
+        
+        if(carte1.numeroCarte == carte2.numeroCarte){
+            carte1 = null;
+            carte2 = null;
+            
+            nombrePaireRetournee++;
+            if(nombrePaireRetournee == nombrePaire){
+                desactiverToutesCartes();
+                boutonRocommencer.hidden = false;
+                resultatDuJeu.hidden = false;
+                msgJeu();
+                
+            }
+        }
+        else{
+            desactiverToutesCartes();
+            setTimeout(cacherCartes, 1000);
+        }
+    }
+}
+
+boutonRocommencer.addEventListener("click", recommencer);
+
+function recommencer(){
+    location.reload();
+    msgJeu();
 }
 
 function desactiverToutesCartes () {
@@ -157,30 +189,39 @@ function cacherCartes () {
 const timerDisplay = document.getElementById('timer')
 
 // mettre le temps en secondes
-let duree = 3
-let intervalId
+let duree = 300;
+let intervalId;
 
-jeu.addEventListener('click', function () {
-  // commencer le timer
-
-  if (!intervalId) {
-    intervalId = setInterval(function () {
-      duree--
-      const minutes = Math.floor(duree / 60)
-      const seconds = duree % 60
-
-      // afficher le temps restant
-      timerDisplay.innerHTML = minutes + ':' + seconds
-
-      // si le temps est écoulé, arrêter le timer
-      if (duree < 0) {
-        clearInterval(intervalId)
-        timerDisplay.innerHTML = "Time's up!"
-        if (confirm('voulez vous rtourner au formulaire?')) {
-          location.reload()
-          // retoure au formulaire
-        }
-      }
-    }, 1000)
-  }
-})
+jeu.addEventListener("click", function() {
+    // commencer le timer
+    
+    if(!intervalId)
+    {
+        intervalId = setInterval(function() {
+            duree--;
+            let minutes = Math.floor(duree / 60);
+            let seconds = duree % 60;
+            
+            // afficher le temps restant
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            if(minutes < 10){
+                minutes = "0" + minutes;
+            }
+            timerDisplay.innerHTML = minutes + ":" + seconds;
+            
+            
+            // si le temps est écoulé, arrêter le timer
+            if (duree < 0 ) {
+                //clearInterval(intervalId);
+                timerDisplay.innerHTML = "Time's up!";
+                desactiverToutesCartes();
+                boutonRocommencer.hidden = false;
+                resultatDuJeu.hidden = false;
+                msgJeu();
+            }
+            
+        }, 1000);
+    }
+});
