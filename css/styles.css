@@ -67,10 +67,29 @@ input[type="submit"]:hover{
     width: 15%;
 }
 
+.carte{
+    display: inline-block;
+}
 
+.carte-cachee{
+    background-image: url(../images/carte.jpg);
+}
+
+.carte-retournee{
+    background-image: url();
+    font-size: 10rem;
+    background-color: white;
+}
+
+.carte-invalide{
+    background-color: red;
+}
+
+.carte-valide{
+    background-color: green;
+}
 
 fieldset{
-    
     font-size: 20px;
     width: 30%;
     margin: 0 auto;
@@ -88,7 +107,7 @@ fieldset{
 }
 
 #jeu{
-text-align: center;
+    text-align: center;
 }
 
 #boutonRecommencer{
