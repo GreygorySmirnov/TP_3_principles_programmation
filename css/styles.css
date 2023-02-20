@@ -4,8 +4,7 @@
 }
 
 .container{
-	width: 90%;
-	max-width: 1200px;
+	width: 95%;
 	margin: 0 auto;
 }
 
@@ -25,8 +24,6 @@ h1{
     color: rgb(9, 67, 75);
     
 }
-
-
 
 body {
     background: rgb(111, 105, 105);
@@ -53,7 +50,6 @@ input[type="submit"]{
 }
 
 input[type="submit"]:hover{
-   
     background-color:rgb(93, 151, 151);
 }
 
@@ -67,15 +63,20 @@ input[type="submit"]:hover{
 
 .carte{
     display: inline-block;
+    margin: 5px;
+    border-radius: 10px;
 }
 
 .carte-cachee{
     background-image: url(../images/carte.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 .carte-retournee{
     background-image: url();
     font-size: 10rem;
+    font-weight: bold;
     background-color: white;
 }
 

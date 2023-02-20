@@ -90,21 +90,25 @@ function melangerCartes () {
 }
 
 function CreerCarte (numeroCarte) {
-  const carte = document.createElement('button')
-  carte.style.width = '236px'
-  carte.style.height = '364px'
+  const carteHTML = document.createElement('button')
+  carteHTML.style.width = '236px'
+  carteHTML.style.height = '364px'
 
-  carte.classList.add('carte')
-  carte.classList.add('carte-cachee')
-  carte.setAttribute('id-carte', cartes.length)
-  carte.setAttribute('numero-carte', numeroCarte)
-  carte.addEventListener('click', function (e) { retournerCarte(e) })
+  /* carteHTML.style.width = jeu.offsetWidth / (nombrePaire * 2) - 4 + 'px'
+  carteHTML.style.height = (jeu.offsetWidth / (nombrePaire * 2)) * 1.6 + 'px'
+  carteHTML.style.fontSize = (jeu.offsetWidth / (nombrePaire * 2)) * 0.5 + 'px' */
+
+  carteHTML.classList.add('carte')
+  carteHTML.classList.add('carte-cachee')
+  carteHTML.setAttribute('id-carte', cartes.length)
+  carteHTML.addEventListener('click', function (e) { CliqueCarte(e) })
 
   const carteObjet = {
     idCarte: cartes.length,
     numeroCarte,
-    carteHTML: carte,
+    carteHTML,
     retourne: false,
+    paireTrouver: false,
     retournerCarte () {
       if (this.retourne === false) {
         this.carteHTML.textContent = this.numeroCarte
@@ -121,20 +125,26 @@ function CreerCarte (numeroCarte) {
   return carteObjet
 }
 
-function retournerCarte (e) {
+function CliqueCarte (e) {
   const idCarteCliquee = e.target.getAttribute('id-carte')
   const carteCliquee = cartes[idCarteCliquee]
 
   if (carte1 == null) {
     carte1 = carteCliquee
     carte1.retournerCarte()
-  } else {
+  } else if (carte1 !== carteCliquee) {
     carte2 = carteCliquee
     carte2.retournerCarte()
 
     if (carte1.numeroCarte === carte2.numeroCarte) {
       carte1.carteHTML.classList.add('carte-valide')
       carte2.carteHTML.classList.add('carte-valide')
+
+      carte1.paireTrouver = true
+      carte2.paireTrouver = true
+
+      carte1.carteHTML.disabled = true
+      carte2.carteHTML.disabled = true
 
       carte1 = null
       carte2 = null
@@ -171,7 +181,9 @@ function desactiverToutesCartes () {
 function activerToutesCartes () {
   for (let index = 0; index < cartes.length; index++) {
     const carte = cartes[index]
-    carte.carteHTML.disabled = false
+    if (carte.paireTrouver === false) {
+      carte.carteHTML.disabled = false
+    }
   }
 }
 
