@@ -90,7 +90,7 @@ function melangerCartes () {
 }
 
 function CreerCarte (numeroCarte) {
-  const carte = document.createElement('div')
+  const carte = document.createElement('button')
   carte.style.width = '236px'
   carte.style.height = '364px'
 
