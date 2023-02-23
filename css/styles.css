@@ -110,9 +110,11 @@ fieldset{
 #jeu{
     text-align: center;
 }
-
+.button{
+    text-align: center;
+} 
 #boutonRecommencer{
-    margin-left: 44%;
+    
     font-size: 20px;
     background-color: rgb(9, 67, 75);
     color: black;
