@@ -129,7 +129,6 @@ function CreerCarte (numeroCarte) {
         this.carteHTML.textContent = this.numeroCarte
         this.retourne = true
         this.carteHTML.classList.replace('carte-cachee', 'carte-retournee')
-        
       } else {
         this.carteHTML.textContent = ''
         this.retourne = false
