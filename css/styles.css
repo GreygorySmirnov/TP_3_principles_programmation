@@ -63,15 +63,6 @@ input[type="submit"]:hover{
     width: 15%;
 }
 
-#carteContainer{
-    width: 100%;
-    height: 150px;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-}
-
 .carte{
     width: 236px;
     height: 364px;
