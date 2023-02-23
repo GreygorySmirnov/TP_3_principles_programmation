@@ -3,6 +3,7 @@ let nombrePaire = 0
 let nombrePaireRetournee = 0
 const formulaire = document.getElementById('formulaire')
 const jeu = document.getElementById('jeu')
+const carteContainer = document.getElementById('carteContainer')
 const boutonRecommencer = document.getElementById('boutonRecommencer')
 const resultatDuJeu = document.getElementById('resultatJeu')
 let premiereCarteCliquee = null
@@ -81,7 +82,7 @@ function creerJeu (nombrePaire) {
   // Créer les cartes dans le DOM
   for (let i = 0; i < carteMelanger.length; i++) {
     const elementCarte = carteMelanger[i]
-    jeu.appendChild(elementCarte.carteHTML)
+    carteContainer.appendChild(elementCarte.carteHTML)
   }
 }
 
