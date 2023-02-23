@@ -1,22 +1,24 @@
+/* Déclaration de variables. */
 let nombrePaire = 0
 let nombrePaireRetournee = 0
 const formulaire = document.getElementById('formulaire')
 const jeu = document.getElementById('jeu')
 const boutonRecommencer = document.getElementById('boutonRecommencer')
 const resultatDuJeu = document.getElementById('resultatJeu')
-let carte1 = null
-let carte2 = null
-
+let premiereCarteCliquee = null
+let deuxiemeCarteCilquee = null
 const cartes = []
 
 formulaire.addEventListener('submit', validerFormulaire)
+resultatDuJeu.addEventListener('click', messageJeu)
 jeu.hidden = true
 boutonRecommencer.hidden = true
 resultatDuJeu.hidden = true
 
-resultatDuJeu.addEventListener('click', msgJeu)
-
-function msgJeu () {
+/**
+ * Il affiche un message à l'utilisateur, selon qu'il a gagné ou perdu, puis il arrête le chronomètre
+ */
+function messageJeu () {
   if (nombrePaireRetournee === nombrePaire && duree > 0) {
     resultatDuJeu.textContent = 'Vous avez gagné!'
   } else {
@@ -27,6 +29,10 @@ function msgJeu () {
   clearInterval(intervalId)
 }
 
+/**
+ * Il valide le formulaire et s'il n'y a pas d'erreurs, il masque le formulaire et affiche le jeu
+ * @param e - l'objet événement
+ */
 function validerFormulaire (e) {
   e.preventDefault()
   const nom = document.getElementById('txtNom').value
@@ -59,6 +65,10 @@ function validerFormulaire (e) {
   }
 }
 
+/**
+ * Créez les cartes en mémoire, mélangez-les, puis créez-les dans le DOM.
+ * @param nombrePaire - nombre de paires de cartes
+ */
 function creerJeu (nombrePaire) {
   // Créer les cartes en mémoire
   for (let index = 0; index < nombrePaire; index++) {
@@ -69,12 +79,17 @@ function creerJeu (nombrePaire) {
   const carteMelanger = melangerCartes()
 
   // Créer les cartes dans le DOM
-
   for (let i = 0; i < carteMelanger.length; i++) {
     const elementCarte = carteMelanger[i]
     jeu.appendChild(elementCarte.carteHTML)
   }
 }
+
+/**
+ * Il prend un tableau de cartes et renvoie un nouveau tableau de cartes avec les mêmes cartes dans un
+ * ordre différent
+ * @returns Un tableau de cartes mélanger.
+ */
 function melangerCartes () {
   const cartesAMelanger = [...cartes]
   for (let index = 0; index < cartesAMelanger.length; index++) {
@@ -89,14 +104,14 @@ function melangerCartes () {
   return cartesAMelanger
 }
 
+/**
+ * Il crée un élément de bouton, lui ajoute des classes, lui ajoute un écouteur d'événement et renvoie
+ * un objet avec certaines propriétés.
+ * @param numeroCarte - le numéro de la carte
+ * @returns un objet.
+ */
 function CreerCarte (numeroCarte) {
   const carteHTML = document.createElement('button')
-  carteHTML.style.width = '236px'
-  carteHTML.style.height = '364px'
-
-  /* carteHTML.style.width = jeu.offsetWidth / (nombrePaire * 2) - 4 + 'px'
-  carteHTML.style.height = (jeu.offsetWidth / (nombrePaire * 2)) * 1.6 + 'px'
-  carteHTML.style.fontSize = (jeu.offsetWidth / (nombrePaire * 2)) * 0.5 + 'px' */
 
   carteHTML.classList.add('carte')
   carteHTML.classList.add('carte-cachee')
@@ -125,38 +140,47 @@ function CreerCarte (numeroCarte) {
   return carteObjet
 }
 
+/**
+ * Si la première carte est nulle, alors la première carte est la carte cliquée et la carte est
+ * retournée. Si la première carte n'est pas nulle et que la première carte n'est pas la carte cliquée,
+ * alors la deuxième carte est la carte cliquée et la carte est retournée. Si la première carte et la
+ * deuxième carte ont le même numéro, alors les cartes sont valides et les cartes sont désactivées. Si
+ * la première carte et la deuxième carte n'ont pas le même numéro, alors les cartes sont invalides et
+ * les cartes sont cachées après une seconde.
+ * @param e - l'objet événement
+ */
 function CliqueCarte (e) {
   const idCarteCliquee = e.target.getAttribute('id-carte')
   const carteCliquee = cartes[idCarteCliquee]
 
-  if (carte1 == null) {
-    carte1 = carteCliquee
-    carte1.retournerCarte()
-  } else if (carte1 !== carteCliquee) {
-    carte2 = carteCliquee
-    carte2.retournerCarte()
+  if (premiereCarteCliquee == null) {
+    premiereCarteCliquee = carteCliquee
+    premiereCarteCliquee.retournerCarte()
+  } else if (premiereCarteCliquee !== carteCliquee) {
+    deuxiemeCarteCilquee = carteCliquee
+    deuxiemeCarteCilquee.retournerCarte()
 
-    if (carte1.numeroCarte === carte2.numeroCarte) {
-      carte1.carteHTML.classList.add('carte-valide')
-      carte2.carteHTML.classList.add('carte-valide')
+    if (premiereCarteCliquee.numeroCarte === deuxiemeCarteCilquee.numeroCarte) {
+      premiereCarteCliquee.carteHTML.classList.add('carte-valide')
+      deuxiemeCarteCilquee.carteHTML.classList.add('carte-valide')
 
-      carte1.paireTrouver = true
-      carte2.paireTrouver = true
+      premiereCarteCliquee.paireTrouver = true
+      deuxiemeCarteCilquee.paireTrouver = true
 
-      carte1.carteHTML.disabled = true
-      carte2.carteHTML.disabled = true
+      premiereCarteCliquee.carteHTML.disabled = true
+      deuxiemeCarteCilquee.carteHTML.disabled = true
 
-      carte1 = null
-      carte2 = null
+      premiereCarteCliquee = null
+      deuxiemeCarteCilquee = null
 
       nombrePaireRetournee++
       if (nombrePaireRetournee === nombrePaire) {
         desactiverToutesCartes()
-        msgJeu()
+        messageJeu()
       }
     } else {
-      carte1.carteHTML.classList.add('carte-invalide')
-      carte2.carteHTML.classList.add('carte-invalide')
+      premiereCarteCliquee.carteHTML.classList.add('carte-invalide')
+      deuxiemeCarteCilquee.carteHTML.classList.add('carte-invalide')
 
       desactiverToutesCartes()
       setTimeout(cacherCartes, 1000)
@@ -166,11 +190,18 @@ function CliqueCarte (e) {
 
 boutonRecommencer.addEventListener('click', recommencer)
 
+/**
+ * Si l'utilisateur clique sur le bouton 'recommencer', la page se rechargera et la fonction
+ * messageJeu() sera appelée.
+ */
 function recommencer () {
   location.reload()
-  msgJeu()
+  messageJeu()
 }
 
+/**
+ * Il désactive toutes les cartes
+ */
 function desactiverToutesCartes () {
   for (let index = 0; index < cartes.length; index++) {
     const carte = cartes[index]
@@ -178,6 +209,10 @@ function desactiverToutesCartes () {
   }
 }
 
+/**
+ * Pour chaque carte du tableau de cartes, si la paire de la carte n'a pas été trouvée, activez la
+ * carte.
+ */
 function activerToutesCartes () {
   for (let index = 0; index < cartes.length; index++) {
     const carte = cartes[index]
@@ -187,14 +222,18 @@ function activerToutesCartes () {
   }
 }
 
+/**
+ * Cette fonction masque les cartes sur lesquelles l'utilisateur a cliqué, supprime la classe qui les
+ * rend rouges et réactive toutes les cartes.
+ */
 function cacherCartes () {
-  carte1.retournerCarte()
-  carte2.retournerCarte()
-  carte1.carteHTML.classList.remove('carte-invalide')
-  carte2.carteHTML.classList.remove('carte-invalide')
+  premiereCarteCliquee.retournerCarte()
+  deuxiemeCarteCilquee.retournerCarte()
+  premiereCarteCliquee.carteHTML.classList.remove('carte-invalide')
+  deuxiemeCarteCilquee.carteHTML.classList.remove('carte-invalide')
 
-  carte1 = null
-  carte2 = null
+  premiereCarteCliquee = null
+  deuxiemeCarteCilquee = null
   activerToutesCartes()
 }
 
@@ -206,10 +245,12 @@ const timerDisplay = document.getElementById('timer')
 let duree = 300
 let intervalId
 
+/* Une fonction qui démarre le chronomètre lorsque l'utilisateur clique sur le jeu. */
 jeu.addEventListener('click', function () {
   // commencer le timer
 
   if (!intervalId) {
+    /* Une fonction qui décrémente le chronomètre à chaque seconde. */
     intervalId = setInterval(function () {
       duree--
       let minutes = Math.floor(duree / 60)
@@ -226,10 +267,9 @@ jeu.addEventListener('click', function () {
 
       // si le temps est écoulé, arrêter le timer
       if (duree < 0) {
-        // clearInterval(intervalId);
         timerDisplay.innerHTML = "Time's up!"
         desactiverToutesCartes()
-        msgJeu()
+        messageJeu()
       }
     }, 1000)
   }

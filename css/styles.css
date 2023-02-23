@@ -62,6 +62,8 @@ input[type="submit"]:hover{
 }
 
 .carte{
+    width: 236px;
+    height: 364px;
     display: inline-block;
     margin: 5px;
     border-radius: 10px;
