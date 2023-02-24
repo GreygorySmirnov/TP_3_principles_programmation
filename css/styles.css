@@ -1,12 +1,12 @@
 *{  
     box-sizing: border-box;
-	margin: 0;
+    margin: 0;
     padding: 0;
 }
 
 .container{
-	width: 95%;
-	margin: 0 auto;
+    width: 95%;
+    margin: 0 auto;
 }
 
 header {
@@ -33,23 +33,23 @@ body {
 }
 
 .container label,input {
-	width: 35%;
+    width: 35%;
     margin-bottom: 15px;
     height: 25px;
     display: inline-block;
     
 }
 legend {
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 20px;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
 }
 
 input[type="submit"]{
     width: 40px;
     height:30px ;
     margin-left: 36.5%;
-
+    
 }
 
 input[type="submit"]:hover{
@@ -68,19 +68,23 @@ input[type="submit"]:hover{
     display: inline-block;
     margin: 3px;
     border-radius: 10px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
 }
 
 .carte-cachee{
     background-image: url(../images/carte.jpg);
     background-size: cover;
     background-position: center;
+    transform: rotateY(-180deg);
 }
 
 .carte-retournee{
     background-image: url();
-    font-size: 10rem;
     font-weight: bold;
     background-color: white;
+    vertical-align: top;
+    
 }
 
 .carte-invalide{
@@ -98,7 +102,7 @@ fieldset{
 }
 
 .invalide {
-	color :rgb(149, 59, 59);
+    color :rgb(149, 59, 59);
 }
 
 #timer {
