@@ -113,6 +113,9 @@ function melangerCartes () {
 function CreerCarte (numeroCarte) {
   const carteHTML = document.createElement('button')
 
+  carteHTML.style.width = jeu.offsetWidth / (nombrePaire * 2) - 10 + 'px'
+  carteHTML.style.height = (jeu.offsetWidth / (nombrePaire * 2) - 10) * 1.5 + 'px'
+  carteHTML.style.fontSize = (jeu.offsetWidth / (nombrePaire * 2) - 10) / 2 + 'px'
   carteHTML.classList.add('carte')
   carteHTML.classList.add('carte-cachee')
   carteHTML.setAttribute('id-carte', cartes.length)

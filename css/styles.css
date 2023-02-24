@@ -1,4 +1,5 @@
-*{  box-sizing: border-box;
+*{  
+    box-sizing: border-box;
 	margin: 0;
     padding: 0;
 }
@@ -64,10 +65,8 @@ input[type="submit"]:hover{
 }
 
 .carte{
-    width: 236px;
-    height: 364px;
     display: inline-block;
-    margin: 5px;
+    margin: 3px;
     border-radius: 10px;
 }
 
