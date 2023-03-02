@@ -35,7 +35,7 @@ function messageJeu () {
  */
 function validerFormulaire (e) {
   e.preventDefault()
-  const nom = document.getElementById('txtNom').value
+  const nom = document.getElementById('inpNom').value
   nombrePaire = parseInt(document.getElementById('nombrePaire').value)
 
   const regNom = /^[A-Za-z]{1,}$/
